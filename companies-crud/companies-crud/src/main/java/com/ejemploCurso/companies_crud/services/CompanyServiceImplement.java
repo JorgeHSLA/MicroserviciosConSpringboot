@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.ejemploCurso.companies_crud.entities.Category;
 import com.ejemploCurso.companies_crud.entities.Company;
-import com.ejemploCurso.companies_crud.entities.WebSite;
 import com.ejemploCurso.companies_crud.repository.CompanyRepository;
 
 import jakarta.transaction.Transactional;
