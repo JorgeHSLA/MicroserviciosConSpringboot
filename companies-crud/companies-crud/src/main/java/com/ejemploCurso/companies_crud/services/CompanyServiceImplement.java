@@ -25,7 +25,7 @@ public class CompanyServiceImplement implements CompanyService{
 
     @Override
     public Company readByName(String name){
-        return this.companyRepository.findbyName(name)
+        return this.companyRepository.findByName(name)
         .orElseThrow(()-> new NoSuchElementException("Company not found"));
     }
         
@@ -42,7 +42,7 @@ public class CompanyServiceImplement implements CompanyService{
 
     @Override
     public Company update(Company company, String name) {
-        var companyToUpdate = companyRepository.findbyName(name)
+        var companyToUpdate = companyRepository.findByName(name)
             .orElseThrow(()-> new NoSuchElementException("Company not found"));
         companyToUpdate.setLogo(company.getLogo());
         companyToUpdate.setFounder(company.getFounder());
@@ -53,7 +53,7 @@ public class CompanyServiceImplement implements CompanyService{
 
     @Override
     public void delete(String name) {
-        var companyToDelete = companyRepository.findbyName(name)
+        var companyToDelete = companyRepository.findByName(name)
             .orElseThrow(()-> new NoSuchElementException("Company not found"));
         this.companyRepository.delete(companyToDelete);
     }

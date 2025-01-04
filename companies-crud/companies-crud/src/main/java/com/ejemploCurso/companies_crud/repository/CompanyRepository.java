@@ -8,6 +8,6 @@ import com.ejemploCurso.companies_crud.entities.Company;
 
 public interface CompanyRepository extends JpaRepository<Company, Long> {
 
-        Optional<Company> findbyName(String name);
+        Optional<Company> findByName(String name);
     
 }

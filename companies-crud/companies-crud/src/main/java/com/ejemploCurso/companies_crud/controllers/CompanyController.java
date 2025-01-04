@@ -51,6 +51,7 @@ public class CompanyController {
     ResponseEntity<?> delete(@PathVariable String name){//la interrogacion significa quese puede devolver cualquier objeto 
 
         log.info("DELETE:company {}",name);
+        this.companyService.delete(name);
         return ResponseEntity.noContent().build();
     } 
 
