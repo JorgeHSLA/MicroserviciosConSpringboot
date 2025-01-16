@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ejemploCurso.companies_crud.entities.Company;
 import com.ejemploCurso.companies_crud.services.CompanyService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,15 +27,18 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @RequestMapping(path = "company")
 @Slf4j
+@Tag(name = "companies resource")
 public class CompanyController {
     private final CompanyService companyService;
 
+    @Operation(summary = "get a company given a company name")
     @GetMapping(path = "{name}") //Es una anotación de Spring que indica que este método maneja solicitudes HTTP del tipo GET.
     ResponseEntity<Company> get(@PathVariable String name) throws NoSuchFieldException{ //Si alguien accede a /company/Google, el valor "Google" se pasa al parámetro name.
         log.info("GET:company {}",name); // mensaje que indica queu todo esta bien
         return ResponseEntity.ok(this.companyService.readByName(name)); //Crea una respuesta HTTP con el estado 200 OK, lo que esta en el ok es lo que devuelve, en este caso una compania con el nombre name
     }
 
+    @Operation(summary = "save in a DB a company given a company from body")
     @PostMapping
     ResponseEntity<Company> post(@RequestBody  Company company){ //request body es un json que se cambia (en este caso) a tipo Company
          log.info("POST:company {}",company.getName()); 
@@ -41,12 +46,14 @@ public class CompanyController {
 
     }
     
+    @Operation(summary = "update in a DB a company given a company from body")
     @PutMapping(path = "{name}") //Es una anotación de Spring que indica que este método maneja solicitudes HTTP del tipo GET.
     ResponseEntity<Company> put(@RequestBody  Company company ,@PathVariable String name) throws NoSuchFieldException{ //Si alguien accede a /company/Google, el valor "Google" se pasa al parámetro name.
         log.info("PUT:company {}",name); // mensaje que indica queu todo esta bien
         return ResponseEntity.ok(this.companyService.update(company, name)); //Crea una respuesta HTTP con el estado 200 OK, lo que esta en el ok es lo que devuelve, en este caso una compania con el nombre name
     }
 
+    @Operation(summary = "delete in a DB a company given a company from body")
     @DeleteMapping(path = "{name}") 
     ResponseEntity<?> delete(@PathVariable String name){//la interrogacion significa quese puede devolver cualquier objeto 
 
